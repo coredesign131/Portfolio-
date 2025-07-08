@@ -1,351 +1,370 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>معرض أعمالي</title>
-<link href="https://fonts.googleapis.com/css2?family=The+Sans:wght@400;700&display=swap" rel="stylesheet">
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معرض أعمالي</title>
+  <link href="https://fonts.googleapis.com/css2?family=The+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-        --main-color: #f2e5c3;
-        --background-color: #f7f7f7;
-        --top-bar-bg: rgba(242, 229, 195, 0.3);
-        --border-thickness: 1px;
-        --image-border-color: #000000;
-        --image-hover-filter: brightness(0.7);
-        --lightbox-bg: rgba(0, 0, 0, 0.8);
-        --counter-bg: #f2e5c3;
-        --counter-text-color: #184e4e;
+      --main-color: #f2e5c3;
+      --background-color: #f7f7f7;
+      --top-bar-bg: rgba(242, 229, 195, 0.3);
+      --border-thickness: 1px;
+      --image-border-color: #000000;
+      --image-hover-filter: brightness(0.7);
+      --lightbox-bg: rgba(0, 0, 0, 0.9);
+      --counter-bg: #f2e5c3;
+      --counter-text-color: #184e4e;
+      --icon-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) hue-rotate(180deg);
     }
 
     body, html {
-        height: 100%;
-        width: 100%;
-        font-family: 'The Sans', sans-serif;
-        background-color: var(--background-color);
-        background-image: url('https://f.top4top.io/p_3433nkju60.png');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
+      height: 100%;
+      width: 100%;
+      font-family: 'The Sans', sans-serif;
+      background-color: var(--background-color);
+      background-image: url('https://f.top4top.io/p_3433nkju60.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     .top-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: var(--top-bar-bg);
-        color: white;
-        padding: 8px 20px;
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: var(--top-bar-bg);
+      color: white;
+      padding: 8px 20px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     }
 
     .top-bar .logo img {
-        height: 30px;
-        border-radius: 50%;
+      height: 30px;
+      border-radius: 50%;
     }
 
     .social-icons {
-        display: flex;
+      display: flex;
     }
 
     .social-icons img {
-        width: 40px;
-        height: 40px;
-        margin: 0 12px;
-        transition: transform 0.3s ease, filter 0.3s ease;
-        filter: brightness(0) saturate(100%) invert(30%) sepia(18%) saturate(1500%) hue-rotate(120deg);
-        object-fit: cover;
-        border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin: 0 12px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: var(--icon-filter);
+      object-fit: cover;
+      border-radius: 50%;
     }
 
     .social-icons img:hover {
-        transform: scale(1.2);
-        filter: brightness(1.2);
+      transform: scale(1.2);
+      filter: brightness(1.2);
     }
 
     .icon-container {
-        position: absolute;
-        top: 80px;
-        right: 10px;
-        z-index: 1000;
+      position: absolute;
+      top: 80px;
+      right: 10px;
+      z-index: 1000;
     }
 
     .icon-container img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      filter: var(--icon-filter);
     }
 
     .content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding-top: 140px;
-        padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 140px;
+      padding-bottom: 20px;
     }
 
     .logo-container {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .logo-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .heading {
-        font-size: 32px;
-        font-weight: bold;
-        color: var(--main-color);
-        margin-bottom: 10px;
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--main-color);
+      margin-bottom: 10px;
     }
 
     .subheading {
-        font-size: 18px;
-        color: var(--main-color);
-        margin-bottom: 20px;
+      font-size: 18px;
+      color: var(--main-color);
+      margin-bottom: 20px;
     }
 
     .gallery-info {
-        width: 100%;
-        background-color: var(--top-bar-bg);
-        color: white;
-        padding: 4px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--top-bar-bg);
+      padding: 12px 20px;
+      flex-wrap: wrap;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      font-family: 'Cairo', sans-serif;
+      position: relative;
     }
 
-    .image-counter {
-        font-size: 18px;
-        font-weight: bold;
-        background-color: var(--counter-bg);
-        padding: 8px 20px;
-        border-radius: 10px;
-        font-family: 'The Sans', sans-serif;
-        color: var(--counter-text-color);
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
+    .filter-btn {
+      background-color: #f2e5c3;
+      color: #184e4e;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background-color: #184e4e;
+      color: #f2e5c3;
+    }
+
+    #image-counter {
+      position: absolute;
+      left: 20px;
+      background-color: #f2e5c3;
+      color: #184e4e;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
     .gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 10px;
-        margin: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 1000px;
+      padding: 0 15px;
+      justify-content: center;
     }
 
     .gallery img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border: var(--border-thickness) solid var(--image-border-color);
-        transition: transform 0.3s ease, filter 0.3s ease;
-        cursor: pointer;
-        border-radius: 5%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: var(--border-thickness) solid var(--image-border-color);
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+      border-radius: 5%;
     }
 
     .gallery img:hover {
-        transform: scale(1.05);
-        filter: var(--image-hover-filter);
+      transform: scale(1.05);
+      filter: var(--image-hover-filter);
     }
 
     .lightbox {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--lightbox-bg);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--lightbox-bg);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      flex-direction: column;
     }
 
     .lightbox img {
-        max-width: 90%;
-        max-height: 90%;
-        border-radius: 10px;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
     }
 
-    .lightbox .close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: white;
-        font-size: 30px;
-        cursor: pointer;
-    }
-
-    .lightbox .close:hover {
-        transform: scale(1.1);
-    }
-
+    .lightbox .close,
     .lightbox .prev,
     .lightbox .next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: transparent;
-        color: #f2e5c3;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        font-size: 30px;
-        border-radius: 5px;
-        user-select: none;
+      position: absolute;
+      color: white;
+      font-size: 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
     }
 
-    .lightbox .prev {
-        left: 10px;
-    }
-
-    .lightbox .next {
-        right: 10px;
-    }
-
-    .lightbox .prev:hover,
-    .lightbox .next:hover {
-        color: white;
-    }
-</style>
+    .lightbox .close { top: 20px; right: 30px; }
+    .lightbox .prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .lightbox .next { right: 20px; top: 50%; transform: translateY(-50%); }
+  </style>
 </head>
 <body oncontextmenu="return false;">
-    <div class="top-bar">
-        <div class="logo">
-            <img src="https://j.top4top.io/p_3433coour0.png" alt="شعار الموقع">
-        </div>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/key_design_am/" target="_blank">
-                <img src="https://e.top4top.io/p_3289gvqk60.png" alt="إنستجرام">
-            </a>
-            <a href="https://www.tiktok.com/@key_design7" target="_blank">
-                <img src="https://f.top4top.io/p_3286veqcz2.png" alt="تيك توك">
-            </a>
-            <a href="https://wa.me/966545473980" target="_blank">
-                <img src="https://e.top4top.io/p_3286lpy0w1.png" alt="واتساب">
-            </a>
-            <a href="mailto:keydesignam@gmail.com" target="_blank">
-                <img src="https://d.top4top.io/p_3286cgw8r0.png" alt="بريد إلكتروني">
-            </a>
-        </div>
+  <div class="top-bar">
+    <div class="logo">
+      <img src="https://j.top4top.io/p_3433coour0.png" alt="شعار الموقع" />
     </div>
-
-    <div class="icon-container" style="top: 80px;">
-        <a href="https://coredesign131.github.io/Link/" target="_blank">
-            <img src="https://d.top4top.io/p_3286vs1730.png" alt="أيقونة إضافية">
-        </a>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/core_design131/" target="_blank">
+        <img src="https://e.top4top.io/p_3289gvqk60.png" alt="إنستجرام" />
+      </a>
+      <a href="https://www.tiktok.com/@core_design131" target="_blank">
+        <img src="https://f.top4top.io/p_3286veqcz2.png" alt="تيك توك" />
+      </a>
+      <a href="https://wa.me/966545473980" target="_blank">
+        <img src="https://e.top4top.io/p_3286lpy0w1.png" alt="واتساب" />
+      </a>
+      <a href="mailto:coredesign131@gmail.com" target="_blank">
+        <img src="https://d.top4top.io/p_3286cgw8r0.png" alt="بريد إلكتروني" />
+      </a>
     </div>
+  </div>
 
-    <div class="content">
-        <div class="logo-container">
-            <img src="https://j.top4top.io/p_3433coour0.png" alt="شعار الموقع">
-        </div>
-        <div class="heading">KEY_DESIGN</div>
-        <div class="subheading">هنا سترون بعض العلامات التجارية التي صممناها</div>
+  <div class="icon-container">
+    <a href="https://coredesign131.github.io/Link/" target="_blank">
+      <img src="https://d.top4top.io/p_3286vs1730.png" alt="عودة" />
+    </a>
+  </div>
+
+  <div class="content">
+    <div class="logo-container">
+      <img src="https://j.top4top.io/p_3433coour0.png" alt="شعار الموقع" />
     </div>
+    <div class="heading">Core Design</div>
+    <div class="subheading">هنا سترون بعض العلامات التجارية التي صممناها</div>
+  </div>
 
-    <div class="gallery-info">
-        <div class="image-counter" id="imageCounter">عدد الصور: 10</div>
+  <div class="gallery-info">
+    <div class="filter-group">
+      <button class="filter-btn active" onclick="filterImages('الكل')">الكل</button>
+      <button class="filter-btn" onclick="filterImages('شعارات')">شعارات</button>
+      <button class="filter-btn" onclick="filterImages('بنرات')">بنرات</button>
+      <button class="filter-btn" onclick="filterImages('بوستات')">بوستات</button>
+      <button class="filter-btn" onclick="filterImages('إعلانات')">إعلانات</button>
+      <button class="filter-btn" onclick="filterImages('دعوات وكروت')">دعوات وكروت</button>
     </div>
+    <div id="image-counter">عدد الصور: 0</div>
+  </div>
 
-    <div class="gallery" id="gallery">
-        <img src="https://c.top4top.io/p_32787ftyq0.jpg" alt="تصميم 1" onclick="openLightbox(this)">
-        <img src="https://d.top4top.io/p_3278744nc1.jpg" alt="تصميم 2" onclick="openLightbox(this)">
-        <img src="https://e.top4top.io/p_3278zt0kp2.jpg" alt="تصميم 3" onclick="openLightbox(this)">
-        <img src="https://f.top4top.io/p_32787t2523.jpg" alt="تصميم 4" onclick="openLightbox(this)">
-        <img src="https://e.top4top.io/p_3282bl3jb0.jpg" alt="تصميم 5" onclick="openLightbox(this)">
-        <img src="https://f.top4top.io/p_32848n9yf0.jpg" alt="تصميم 6" onclick="openLightbox(this)">
-        <img src="https://i.top4top.io/p_3285xoyy80.jpg" alt="تصميم 7" onclick="openLightbox(this)">
-        <img src="https://c.top4top.io/p_328989ca10.jpg" alt="تصميم 8" onclick="openLightbox(this)">
-        <img src="https://e.top4top.io/p_3292zpagi0.jpg" alt="تصميم 9" onclick="openLightbox(this)">
-        <img src="https://i.top4top.io/p_32948q40k0.jpg" alt="تصميم 10" onclick="openLightbox(this)">
-    </div>
+  <div class="gallery" id="gallery">
+    <img src="https://c.top4top.io/p_32787ftyq0.jpg" alt="شعار 1" data-category="شعارات" />
+    <img src="https://d.top4top.io/p_3278744nc1.jpg" alt="شعار 2" data-category="شعارات" />
+    <img src="https://e.top4top.io/p_3278zt0kp2.jpg" alt="بوست 1" data-category="بوستات" />
+    <img src="https://f.top4top.io/p_32848n9yf0.jpg" alt="إعلان" data-category="إعلانات" />
+    <img src="https://e.top4top.io/p_3292zpagi0.jpg" alt="دعوة" data-category="دعوات وكروت" />
+  </div>
 
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <span class="close" onclick="closeLightbox()">×</span>
-        <img id="lightboxImage" src="" alt="الصورة المكبرة">
-        <button class="prev" onclick="showPrevImage(event)">&#10094;</button>
-        <button class="next" onclick="showNextImage(event)">&#10095;</button>
-    </div>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="close" onclick="closeLightbox(event)">×</button>
+    <button class="prev" onclick="showPrev(event)">❮</button>
+    <img id="lightboxImage" src="" alt="صورة مكبرة" />
+    <button class="next" onclick="showNext(event)">❯</button>
+  </div>
+  <script>
+  let currentIndex = 0;
+  let currentImages = [];
 
-<script>
-    let currentIndex = 0;
+  function updateImageCounter() {
+    const visible = [...document.querySelectorAll('#gallery img')].filter(img => img.style.display !== 'none');
+    document.getElementById('image-counter').textContent = `عدد الصور: ${visible.length}`;
+  }
 
-    function openLightbox(image) {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const galleryImages = document.querySelectorAll('#gallery img');
+  function filterImages(category) {
+    const images = document.querySelectorAll('#gallery img');
+    const buttons = document.querySelectorAll('.filter-btn');
 
-        currentIndex = Array.from(galleryImages).indexOf(image);
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.textContent === category) btn.classList.add('active');
+    });
 
-        lightbox.style.display = 'flex';
-        lightboxImage.src = image.src;
+    images.forEach(img => {
+      const imgCategory = img.getAttribute('data-category');
+      img.style.display = (category === 'الكل' || imgCategory === category) ? 'block' : 'none';
+    });
+
+    updateClickEvents();
+    updateImageCounter();
+  }
+
+  function updateClickEvents() {
+    currentImages = [...document.querySelectorAll('#gallery img')].filter(img => img.style.display !== 'none');
+    currentImages.forEach((img, index) => {
+      img.onclick = () => openLightbox(index);
+    });
+  }
+
+  function openLightbox(index) {
+    currentIndex = index;
+    document.getElementById('lightboxImage').src = currentImages[currentIndex].src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeLightbox(e) {
+    if (e.target.id === 'lightbox' || e.target.classList.contains('close')) {
+      document.getElementById('lightbox').style.display = 'none';
     }
+  }
 
-    function closeLightbox() {
-        const lightbox = document.getElementById('lightbox');
-        lightbox.style.display = 'none';
+  function showNext(e) {
+    e.stopPropagation();
+    if (currentIndex < currentImages.length - 1) {
+      currentIndex++;
+      document.getElementById('lightboxImage').src = currentImages[currentIndex].src;
     }
+  }
 
-    function showNextImage(event) {
-        event.stopPropagation();
-        const galleryImages = document.querySelectorAll('#gallery img');
-        if (currentIndex < galleryImages.length - 1) {
-            currentIndex++;
-            const lightboxImage = document.getElementById('lightboxImage');
-            lightboxImage.src = galleryImages[currentIndex].src;
-        }
+  function showPrev(e) {
+    e.stopPropagation();
+    if (currentIndex > 0) {
+      currentIndex--;
+      document.getElementById('lightboxImage').src = currentImages[currentIndex].src;
     }
+  }
 
-    function showPrevImage(event) {
-        event.stopPropagation();
-        const galleryImages = document.querySelectorAll('#gallery img');
-        if (currentIndex > 0) {
-            currentIndex--;
-            const lightboxImage = document.getElementById('lightboxImage');
-            lightboxImage.src = galleryImages[currentIndex].src;
-        }
-    }
-
-    function updateImageCounter() {
-        const gallery = document.getElementById('gallery');
-        const imageCounter = document.getElementById('imageCounter');
-        const imageCount = gallery.getElementsByTagName('img').length;
-        imageCounter.textContent = `عدد الصور: ${imageCount}`;
-    }
-
-    window.onload = updateImageCounter;
-
-    const observer = new MutationObserver(updateImageCounter);
-    observer.observe(document.getElementById('gallery'), { childList: true });
+  window.onload = () => {
+    filterImages('الكل');
+  };
 </script>
 </body>
 </html>
