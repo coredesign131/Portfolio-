@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     :root {
       --main-color: #f2e5c3;
       --background-color: #f7f7f7;
@@ -18,18 +19,15 @@
       --lightbox-bg: rgba(0, 0, 0, 0.9);
       --counter-bg: #f2e5c3;
       --counter-text-color: #184e4e;
-      --icon-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) hue-rotate(180deg);
+      --icon-filter: brightness(0) saturate(100%) invert(100%);
     }
 
-    body, html {
-      height: 100%;
-      width: 100%;
-      font-family: 'The Sans', sans-serif;
+    body {
       background-color: var(--background-color);
       background-image: url('https://f.top4top.io/p_3433nkju60.png');
       background-size: cover;
-      background-position: center;
       background-attachment: fixed;
+      font-family: 'The Sans', sans-serif;
     }
 
     .top-bar {
@@ -46,7 +44,7 @@
       align-items: center;
       border-bottom-left-radius: 15px;
       border-bottom-right-radius: 15px;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     }
 
     .top-bar .logo img {
@@ -102,12 +100,9 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
-      margin-bottom: 20px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
     }
 
     .logo-container img {
@@ -128,25 +123,24 @@
       color: var(--main-color);
       margin-bottom: 20px;
     }
-
     .gallery-info {
       display: flex;
       justify-content: center;
-      align-items: center;
+      flex-wrap: wrap;
       background-color: var(--top-bar-bg);
       padding: 12px 20px;
-      flex-wrap: wrap;
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
       font-family: 'Cairo', sans-serif;
-      position: relative;
+      border-radius: 15px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      margin: 0 auto;
+      max-width: 1000px;
     }
 
     .filter-group {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .filter-btn {
@@ -157,9 +151,9 @@
       border-radius: 10px;
       font-weight: bold;
       font-size: 14px;
-      font-family: 'Cairo', sans-serif;
+      white-space: nowrap;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-family: 'Cairo', sans-serif;
     }
 
     .filter-btn:hover,
@@ -169,15 +163,18 @@
     }
 
     #image-counter {
-      position: absolute;
-      left: 20px;
       background-color: #f2e5c3;
       color: #184e4e;
-      padding: 6px 12px;
+      padding: 8px 16px;
       border-radius: 8px;
       font-size: 14px;
       font-weight: bold;
+      font-family: 'Cairo', sans-serif;
+      margin: 12px auto 0;
+      max-width: 1000px;
+      text-align: center;
     }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -203,6 +200,20 @@
       filter: var(--image-hover-filter);
     }
 
+    @media (max-width: 600px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-info {
+        padding: 15px 10px;
+      }
+
+      #image-counter {
+        width: calc(100% - 30px);
+      }
+    }
+
     .lightbox {
       display: none;
       position: fixed;
@@ -214,7 +225,6 @@
       justify-content: center;
       align-items: center;
       z-index: 2000;
-      flex-direction: column;
     }
 
     .lightbox img {
@@ -245,16 +255,16 @@
       <img src="https://j.top4top.io/p_3433coour0.png" alt="شعار الموقع" />
     </div>
     <div class="social-icons">
-      <a href="https://www.instagram.com/core_design131/" target="_blank">
+      <a href="https://www.instagram.com/key_design_am/" target="_blank">
         <img src="https://e.top4top.io/p_3289gvqk60.png" alt="إنستجرام" />
       </a>
-      <a href="https://www.tiktok.com/@core_design131" target="_blank">
+      <a href="https://www.tiktok.com/@key_design7" target="_blank">
         <img src="https://f.top4top.io/p_3286veqcz2.png" alt="تيك توك" />
       </a>
       <a href="https://wa.me/966545473980" target="_blank">
         <img src="https://e.top4top.io/p_3286lpy0w1.png" alt="واتساب" />
       </a>
-      <a href="mailto:coredesign131@gmail.com" target="_blank">
+      <a href="mailto:keydesignam@gmail.com" target="_blank">
         <img src="https://d.top4top.io/p_3286cgw8r0.png" alt="بريد إلكتروني" />
       </a>
     </div>
@@ -270,10 +280,11 @@
     <div class="logo-container">
       <img src="https://j.top4top.io/p_3433coour0.png" alt="شعار الموقع" />
     </div>
-    <div class="heading">Core Design</div>
+    <div class="heading">KEY_DESIGN</div>
     <div class="subheading">هنا سترون بعض العلامات التجارية التي صممناها</div>
   </div>
 
+  <!-- شريط الأقسام -->
   <div class="gallery-info">
     <div class="filter-group">
       <button class="filter-btn active" onclick="filterImages('الكل')">الكل</button>
@@ -283,9 +294,12 @@
       <button class="filter-btn" onclick="filterImages('إعلانات')">إعلانات</button>
       <button class="filter-btn" onclick="filterImages('دعوات وكروت')">دعوات وكروت</button>
     </div>
-    <div id="image-counter">عدد الصور: 0</div>
   </div>
 
+  <!-- عداد الصور -->
+  <div id="image-counter">عدد الصور: 0</div>
+
+  <!-- صور المعرض -->
   <div class="gallery" id="gallery">
     <img src="https://c.top4top.io/p_32787ftyq0.jpg" alt="شعار 1" data-category="شعارات" />
     <img src="https://d.top4top.io/p_3278744nc1.jpg" alt="شعار 2" data-category="شعارات" />
@@ -294,8 +308,9 @@
     <img src="https://e.top4top.io/p_3292zpagi0.jpg" alt="دعوة" data-category="دعوات وكروت" />
   </div>
 
+  <!-- وضع التكبير -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <button class="close" onclick="closeLightbox(event)">×</button>
+    <button class="close" onclick="closeLightbox()">×</button>
     <button class="prev" onclick="showPrev(event)">❮</button>
     <img id="lightboxImage" src="" alt="صورة مكبرة" />
     <button class="next" onclick="showNext(event)">❯</button>
@@ -336,12 +351,14 @@
 
   function openLightbox(index) {
     currentIndex = index;
-    document.getElementById('lightboxImage').src = currentImages[currentIndex].src;
-    document.getElementById('lightbox').style.display = 'flex';
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    lightboxImage.src = currentImages[currentIndex].src;
+    lightbox.style.display = 'flex';
   }
 
   function closeLightbox(e) {
-    if (e.target.id === 'lightbox' || e.target.classList.contains('close')) {
+    if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('close')) {
       document.getElementById('lightbox').style.display = 'none';
     }
   }
