@@ -2,10 +2,12 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>معرض أعمالي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>معرض أعمالي - فيديوهات مضافة</title>
+
   <link href="https://fonts.googleapis.com/css2?family=The+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -123,6 +125,7 @@
       color: var(--main-color);
       margin-bottom: 20px;
     }
+
     .gallery-info {
       display: flex;
       justify-content: center;
@@ -132,7 +135,7 @@
       font-family: 'Cairo', sans-serif;
       border-radius: 15px;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      margin: 0 auto;
+      margin: 0 auto 10px;
       max-width: 1000px;
     }
 
@@ -144,8 +147,8 @@
     }
 
     .filter-btn {
-      background-color: #f2e5c3;
-      color: #184e4e;
+      background-color: #f2e5c3; /* بيج فاتح */
+      color: #184e4e; /* أخضر داكن */
       border: none;
       padding: 8px 16px;
       border-radius: 10px;
@@ -154,12 +157,13 @@
       white-space: nowrap;
       cursor: pointer;
       font-family: 'Cairo', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .filter-btn:hover,
     .filter-btn.active {
-      background-color: #184e4e;
-      color: #f2e5c3;
+      background-color: #f9a825; /* أصفر ذهبي */
+      color: #1a1a1a; /* محايد داكن */
     }
 
     #image-counter {
@@ -170,7 +174,7 @@
       font-size: 14px;
       font-weight: bold;
       font-family: 'Cairo', sans-serif;
-      margin: 12px auto 0;
+      margin: 0 auto 20px;
       max-width: 1000px;
       text-align: center;
     }
@@ -179,25 +183,31 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin: 20px auto;
+      margin: 0 auto 40px;
       max-width: 1000px;
       padding: 0 15px;
-      justify-content: center;
     }
 
-    .gallery img {
+    .gallery img,
+    .gallery video {
       width: 100%;
-      height: 100%;
+      height: 250px;
       object-fit: cover;
       border: var(--border-thickness) solid var(--image-border-color);
       transition: transform 0.3s ease, filter 0.3s ease;
       cursor: pointer;
       border-radius: 5%;
+      background-color: black;
     }
 
     .gallery img:hover {
       transform: scale(1.05);
       filter: var(--image-hover-filter);
+    }
+
+    /* الفيديو ما يحتاج فلتر عند hover عشان لا يتأثر العرض */
+    .gallery video:hover {
+      transform: scale(1.02);
     }
 
     @media (max-width: 600px) {
@@ -214,6 +224,7 @@
       }
     }
 
+    /* نافذة التكبير للصور فقط */
     .lightbox {
       display: none;
       position: fixed;
@@ -242,11 +253,13 @@
       cursor: pointer;
       background: none;
       border: none;
+      user-select: none;
     }
 
     .lightbox .close { top: 20px; right: 30px; }
     .lightbox .prev { left: 20px; top: 50%; transform: translateY(-50%); }
     .lightbox .next { right: 20px; top: 50%; transform: translateY(-50%); }
+
   </style>
 </head>
 <body oncontextmenu="return false;">
@@ -287,53 +300,56 @@
   <!-- شريط الأقسام -->
   <div class="gallery-info">
     <div class="filter-group">
-      <button class="filter-btn active" onclick="filterImages('الكل')">الكل</button>
-      <button class="filter-btn" onclick="filterImages('شعارات')">شعارات</button>
-      <button class="filter-btn" onclick="filterImages('بنرات')">بنرات</button>
-      <button class="filter-btn" onclick="filterImages('تصاميم سوشال ميديا')">تصاميم سوشال ميديا</button>
-
-      <button class="filter-btn" onclick="filterImages('دعوات وكروت')">دعوات وكروت</button>
+      <button class="filter-btn active" onclick="filterItems('الكل')">الكل</button>
+      <button class="filter-btn" onclick="filterItems('شعارات')">شعارات</button>
+      <button class="filter-btn" onclick="filterItems('بنرات')">بنرات</button>
+      <button class="filter-btn" onclick="filterItems('تصاميم سوشال ميديا')">تصاميم سوشال ميديا</button>
+      <button class="filter-btn" onclick="filterItems('دعوات وكروت')">دعوات وكروت</button>
+      <button class="filter-btn" onclick="filterItems('فيديوهات')">فيديوهات</button>
     </div>
   </div>
 
-  <!-- عداد الصور -->
-  <div id="image-counter">عدد الصور: 0</div>
+  <!-- عداد الصور والفيديوهات -->
+  <div id="image-counter">عدد العناصر: 0</div>
 
-  <!-- صور المعرض -->
+  <!-- معرض الأعمال (صور وفيديوهات) -->
   <div class="gallery" id="gallery">
+    <!-- صور -->
     <img src="https://h.top4top.io/p_3476v165k1.jpg" alt="شعار 1" data-category="شعارات" />
     <img src="https://i.top4top.io/p_3476jm1812.jpg" alt="شعار 2" data-category="شعارات" />
     <img src="https://j.top4top.io/p_3476hmg1x3.jpg" alt="شعار 3" data-category="شعارات" />
     <img src="https://k.top4top.io/p_3476my80i4.jpg" alt="شعار 4" data-category="شعارات" />
     <img src="https://l.top4top.io/p_3476xjtrn5.jpg" alt="شعار 5" data-category="شعارات" />
     <img src="https://a.top4top.io/p_34766lz5b6.jpg" alt="شعار 6" data-category="شعارات" />
-<img src="https://b.top4top.io/p_34763mk657.jpg" alt="شعار 7" data-category="شعارات" />
-<img src="https://c.top4top.io/p_3476lbtpu8.jpg" alt="شعار 8" data-category="شعارات" />
-<img src="https://d.top4top.io/p_3476obnjk9.jpg" alt="شعار 9" data-category="شعارات" />
-<img src="https://k.top4top.io/p_3476pcoin0.jpg" alt="شعار 10" data-category="شعارات" />
-<img src="https://b.top4top.io/p_3476r3thb0.jpg" alt="شعار 11" data-category="شعارات" />
-<img src="https://l.top4top.io/p_3476gvmot1.jpg" alt="تصاميم سوشال ميديا" data-category="تصاميم سوشال ميديا" />
-  </div>
+    <img src="https://b.top4top.io/p_34763mk657.jpg" alt="شعار 7" data-category="شعارات" />
+    <img src="https://c.top4top.io/p_3476lbtpu8.jpg" alt="شعار 8" data-category="شعارات" />
+    <img src="https://d.top4top.io/p_3476obnjk9.jpg" alt="شعار 9" data-category="شعارات" />
+    <img src="https://k.top4top.io/p_3476pcoin0.jpg" alt="شعار 10" data-category="شعارات" />
+    <img src="https://b.top4top.io/p_3476r3thb0.jpg" alt="شعار 11" data-category="شعارات" />
+    <img src="https://l.top4top.io/p_3476gvmot1.jpg" alt="تصاميم سوشال ميديا" data-category="تصاميم سوشال ميديا" />
 
-
-  <!-- وضع التكبير -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <button class="close" onclick="closeLightbox()">×</button>
-    <button class="prev" onclick="showPrev(event)">❮</button>
-    <img id="lightboxImage" src="" alt="صورة مكبرة" />
-    <button class="next" onclick="showNext(event)">❯</button>
+    <!-- فيديوهات -->
+    <video controls preload="metadata" data-category="فيديوهات" poster="https://i.top4top.io/p_3476jm1812.jpg">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+    <video controls preload="metadata" data-category="فيديوهات" poster="https://i.top4top.io/p_3476jm1812.jpg">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
   </div>
   <script>
   let currentIndex = 0;
-  let currentImages = [];
+  let currentItems = [];
 
-  function updateImageCounter() {
-    const visible = [...document.querySelectorAll('#gallery img')].filter(img => img.style.display !== 'none');
-    document.getElementById('image-counter').textContent = `عدد الصور: ${visible.length}`;
+  function updateItemCounter() {
+    const visibleItems = [...document.querySelectorAll('#gallery > img, #gallery > video')]
+      .filter(item => item.style.display !== 'none');
+    document.getElementById('image-counter').textContent = `عدد العناصر: ${visibleItems.length}`;
   }
 
-  function filterImages(category) {
-    const images = document.querySelectorAll('#gallery img');
+  function filterItems(category) {
+    const items = [...document.querySelectorAll('#gallery > img, #gallery > video')];
     const buttons = document.querySelectorAll('.filter-btn');
 
     buttons.forEach(btn => {
@@ -341,19 +357,34 @@
       if (btn.textContent === category) btn.classList.add('active');
     });
 
-    images.forEach(img => {
-      const imgCategory = img.getAttribute('data-category');
-      img.style.display = (category === 'الكل' || imgCategory === category) ? 'block' : 'none';
+    items.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+      if (category === 'الكل' || itemCategory === category) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
     });
 
     updateClickEvents();
-    updateImageCounter();
+    updateItemCounter();
   }
 
   function updateClickEvents() {
-    currentImages = [...document.querySelectorAll('#gallery img')].filter(img => img.style.display !== 'none');
-    currentImages.forEach((img, index) => {
+    // نعرض التكبير فقط على الصور المعروضة (مو الفيديو)
+    currentItems = [...document.querySelectorAll('#gallery > img')]
+      .filter(img => img.style.display !== 'none');
+
+    currentItems.forEach((img, index) => {
+      img.style.cursor = 'pointer';
       img.onclick = () => openLightbox(index);
+    });
+
+    // تعطيل النقر على الفيديو (عشان ما يفتح تكبير)
+    const videos = [...document.querySelectorAll('#gallery > video')];
+    videos.forEach(video => {
+      video.onclick = null;
+      video.style.cursor = 'default';
     });
   }
 
@@ -361,7 +392,7 @@
     currentIndex = index;
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
-    lightboxImage.src = currentImages[currentIndex].src;
+    lightboxImage.src = currentItems[currentIndex].src;
     lightbox.style.display = 'flex';
   }
 
@@ -373,9 +404,9 @@
 
   function showNext(e) {
     e.stopPropagation();
-    if (currentIndex < currentImages.length - 1) {
+    if (currentIndex < currentItems.length - 1) {
       currentIndex++;
-      document.getElementById('lightboxImage').src = currentImages[currentIndex].src;
+      document.getElementById('lightboxImage').src = currentItems[currentIndex].src;
     }
   }
 
@@ -383,13 +414,19 @@
     e.stopPropagation();
     if (currentIndex > 0) {
       currentIndex--;
-      document.getElementById('lightboxImage').src = currentImages[currentIndex].src;
+      document.getElementById('lightboxImage').src = currentItems[currentIndex].src;
     }
   }
 
   window.onload = () => {
-    filterImages('الكل');
+    filterItems('الكل');
   };
 </script>
-</body>
-</html>
+
+<!-- نافذة التكبير (Lightbox) الصور فقط -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="close" onclick="closeLightbox()">×</button>
+  <button class="prev" onclick="showPrev(event)">❮</button>
+  <img id="lightboxImage" src="" alt="صورة مكبرة" />
+  <button class="next" onclick="showNext(event)">❯</button>
+</div>
